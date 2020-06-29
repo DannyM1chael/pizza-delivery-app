@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function AddBtn() {
   return (
-    <div class="button button--outline button--add">
+    <div className="button button--outline button--add">
       <svg
         width="12"
         height="12"

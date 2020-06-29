@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import CartBtn from '../CartBtn';
 
 export default function Header() {
@@ -7,7 +8,9 @@ export default function Header() {
     <div className="header">
       <div className="container">
         <div className="header__logo">
-          <img width="38" src={logoImg} alt="Pizza logo" />
+          <Link to="/">
+            <img width="38" src={logoImg} alt="Pizza logo" />
+          </Link>
           <div>
             <h1>Pizza Delivery</h1>
             <p>Order our best pizza today!</p>

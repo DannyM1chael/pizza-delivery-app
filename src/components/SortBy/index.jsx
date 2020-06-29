@@ -1,10 +1,36 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 export default function SortBy({ sorts }) {
+  const [visible, setVisible] = useState(false);
+  const [active, setActive] = useState(0);
+
+  const sortByRef = useRef();
+
+  const handleOutsideClick = (e) => {
+    if (!e.path.includes(sortByRef.current)) {
+      setVisible(false);
+    }
+  };
+
+  const onSelectClick = (index) => {
+    setActive(index);
+    setVisible(false);
+  };
+
+  const toggleVisible = () => {
+    setVisible(!visible);
+  };
+
+  useEffect(() => {
+    document.body.addEventListener('click', handleOutsideClick);
+    return () => document.body.removeEventListener('click', handleOutsideClick);
+  }, []);
+
   return (
-    <div className="sort">
+    <div ref={sortByRef} className="sort">
       <div className="sort__label">
         <svg
+          className={visible ? 'opened' : ''}
           width="10"
           height="6"
           viewBox="0 0 10 6"
@@ -16,15 +42,23 @@ export default function SortBy({ sorts }) {
           />
         </svg>
         <b>Sorting by:</b>
-        <span>{sorts[0]}</span>
+        <span onClick={toggleVisible}>{sorts[active]}</span>
       </div>
-      <div className="sort__popup">
-        <ul>
-          {sorts.map((sort, index) => (
-            <li key={index}>{sort}</li>
-          ))}
-        </ul>
-      </div>
+      {visible && (
+        <div className="sort__popup">
+          <ul>
+            {sorts &&
+              sorts.map((sort, index) => (
+                <li
+                  key={index}
+                  className={active === index ? 'active' : ''}
+                  onClick={() => onSelectClick(index)}>
+                  {sort}
+                </li>
+              ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }

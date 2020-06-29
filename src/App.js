@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.sass';
 
-import { Header, Category, PizzaBlock } from './components';
+import { Header, Category, Banner, Home } from './components';
 import { categories, items, types, sizes, sorts } from './api';
 
 function App() {
@@ -9,10 +9,11 @@ function App() {
     <>
       <div className="wrapper">
         <Header />
+        <Banner />
         <div className="content">
           <div className="container">
             <Category categories={categories} sorts={sorts} />
-            <PizzaBlock items={items} types={types} sizes={sizes} />
+            <Home items={items} types={types} sizes={sizes} />
           </div>
         </div>
       </div>

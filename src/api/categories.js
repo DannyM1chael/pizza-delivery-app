@@ -1,1 +1,1 @@
-export default ['All', 'Meat', 'Vegetarian', 'BBQ', 'Chili'];
+export default ['Meat', 'Vegetarian', 'Cheese', 'Chili'];

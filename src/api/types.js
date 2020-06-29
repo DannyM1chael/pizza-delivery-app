@@ -1,1 +1,1 @@
-export default ['thin', 'traditional'];
+export default ['Thin', 'Traditional'];

@@ -1,9 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import * as URL from '../../router/url';
 
 export default function CartBtn() {
   return (
     <div className="header__cart">
-      <a href="/cart.html" className="button button--cart">
+      <Link to={URL.CART} className="button button--cart">
         <span>$10</span>
         <div className="button__delimiter"></div>
         <svg
@@ -35,7 +37,7 @@ export default function CartBtn() {
           />
         </svg>
         <span>3</span>
-      </a>
+      </Link>
     </div>
   );
 }
