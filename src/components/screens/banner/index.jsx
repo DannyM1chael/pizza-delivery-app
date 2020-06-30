@@ -6,7 +6,7 @@ export default function Banner() {
       style={{
         display: 'flex',
         justifyContent: 'center',
-        marginBottom: '10px',
+        marginBottom: '20px',
       }}>
       <img
         src="https://cdn.papajohns.ru//images/banners/34c0953704f42caa1563f3012eee153e.png"

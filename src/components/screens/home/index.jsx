@@ -1,28 +1,29 @@
-import React from 'react';
-import { Type, Size, AddBtn } from './components';
+import React, { useState, useEffect } from 'react';
+import { sorts, categories } from '../../../api';
+import { Category, Banner } from '../../../components';
+import { Content } from './components';
 
-export default function Home({ items, types, sizes }) {
+export default function Home() {
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    fetch('http://localhost:3000/db.json')
+      .then((res) => res.json())
+      .then((json) => {
+        setItems(json.items);
+      });
+  }, []);
+
   return (
-    <>
+    <div className="container">
+      <Banner />
+      <Category categories={categories} sorts={sorts} />
       <h2 className="content__title">Pizza</h2>
       <div className="content__items">
-        {items.map((item, index) => {
-          return (
-            <div className="pizza-block" key={index}>
-              <img className="pizza-block__image" src={item.img} alt="Pizza" />
-              <h4 className="pizza-block__title">{item.name}</h4>
-              <div className="pizza-block__selector">
-                <Type types={types} />
-                <Size sizes={sizes} />
-              </div>
-              <div className="pizza-block__bottom">
-                <div className="pizza-block__price">from $10</div>
-                <AddBtn />
-              </div>
-            </div>
-          );
-        })}
+        {items.map((item) => (
+          <Content key={item.id} {...item} />
+        ))}
       </div>
-    </>
+    </div>
   );
 }
