@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import * as URL from '../../router/url';
 
 export default function CartBtn() {
+  const counter = useSelector((state) => state.counter);
   return (
     <div className="header__cart">
       <Link to={URL.CART} className="button button--cart">
@@ -36,7 +38,7 @@ export default function CartBtn() {
             strokeLinejoin="round"
           />
         </svg>
-        <span>3</span>
+        <span>{counter}</span>
       </Link>
     </div>
   );

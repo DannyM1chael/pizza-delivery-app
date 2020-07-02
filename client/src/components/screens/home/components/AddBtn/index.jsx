@@ -1,8 +1,11 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { updateCart } from '../../../../../store/actions';
 
 export default function AddBtn() {
+  const dispatch = useDispatch();
   return (
-    <div className="button button--outline button--add">
+    <div className="button button--outline button--add" onClick={() => dispatch(updateCart(1))}>
       <svg
         width="12"
         height="12"
