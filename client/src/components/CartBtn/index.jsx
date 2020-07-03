@@ -4,11 +4,12 @@ import { useSelector } from 'react-redux';
 import * as URL from '../../router/url';
 
 export default function CartBtn() {
-  const counter = useSelector((state) => state.counter);
+  const counter = useSelector((state) => state.app.all);
+  const total = useSelector((state) => state.app.total);
   return (
     <div className="header__cart">
       <Link to={URL.CART} className="button button--cart">
-        <span>&euro;10</span>
+        <span>&euro;{total}</span>
         <div className="button__delimiter"></div>
         <svg
           width="18"

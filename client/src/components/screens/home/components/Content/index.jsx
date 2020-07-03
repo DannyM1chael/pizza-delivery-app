@@ -2,7 +2,7 @@ import React from 'react';
 import * as PropTypes from 'prop-types';
 import { Type, Size, AddBtn } from '../';
 
-export default function Content({ imageUrl, name, types, sizes, price }) {
+export default function Content({ id, imageUrl, name, types, sizes, price }) {
   return (
     <div className="pizza-block">
       <img className="pizza-block__image" src={imageUrl} alt="Pizza" />
@@ -13,7 +13,7 @@ export default function Content({ imageUrl, name, types, sizes, price }) {
       </div>
       <div className="pizza-block__bottom">
         <div className="pizza-block__price">from &euro;{price}</div>
-        <AddBtn />
+        <AddBtn id={id} />
       </div>
     </div>
   );

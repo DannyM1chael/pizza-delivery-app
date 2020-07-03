@@ -1,5 +1,12 @@
+import { createReducer } from '@reduxjs/toolkit';
+import * as actions from '../actions';
+
 const initialState = {
-  category: [],
+  categories: ['Meat', 'Vegetarian', 'Cheese', 'Chili'],
+  sorts: ['popularity', 'price', 'name'],
 };
 
-const filterReducer = (state = initialState, action) => {};
+export const cats = createReducer(initialState, {
+  [actions.filterItems]: (state) => ({ ...state, category: state.category }),
+  [actions.sortItems]: (state) => ({ ...state, sorts: state.sorts }),
+});

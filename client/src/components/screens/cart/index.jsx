@@ -1,20 +1,27 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { CartTop, CartBottom, Item, EmptyCart } from './components';
+import { useSelector } from 'react-redux';
 
 export default function Cart() {
-  const cartEmtyImg = process.env.PUBLIC_URL + 'assets/img/empty-cart.png';
+  const counter = useSelector((state) => state.app.all);
+  const cartData = useSelector((state) => state.app.cart);
   return (
-    <>
-      <div className="container container--cart">
-        <div className="cart cart--empty">
-          <h2>Cart is empty</h2>
-          <p>It's seems to be you haven't order pizza yet</p>
-          <img src={cartEmtyImg} alt="Empty cart" />
-          <Link to="/" className="button button--black">
-            <span>Back to Home</span>
-          </Link>
-        </div>
-      </div>
-    </>
+    <div className="container container--cart">
+      {counter > 0 ? (
+        <>
+          <CartTop />
+          <div className="cart">
+            <div className="content__items">
+              {cartData.map((item) => (
+                <Item key={item.id} {...item} />
+              ))}
+            </div>
+          </div>
+          <CartBottom />
+        </>
+      ) : (
+        <EmptyCart />
+      )}
+    </div>
   );
 }

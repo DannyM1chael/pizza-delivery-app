@@ -1,6 +1,12 @@
 import { combineReducers } from 'redux';
-import { updateCartReducer } from './updateCartReducer';
+import { app } from './CartReducer';
+import { cats } from './filterReducer';
+import { main } from './fetchReducer';
+import { load } from './loadReducer';
 
 export const rootReducer = combineReducers({
-  counter: updateCartReducer,
+  app,
+  cats,
+  main,
+  load,
 });

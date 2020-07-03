@@ -1,11 +1,21 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { updateCart } from '../../../../../store/actions';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateCartCounter, updateCart, updateTotalCart } from '../../../../../store/actions';
 
-export default function AddBtn() {
+export default function AddBtn({ id }) {
+  const itemData = useSelector((state) => state.main.items.payload);
+
   const dispatch = useDispatch();
+
+  const handleAddToCart = () => {
+    const addedItem = itemData.find((item) => item.id === id);
+    dispatch(updateCartCounter());
+    dispatch(updateCart(addedItem));
+    dispatch(updateTotalCart(addedItem.price));
+  };
+
   return (
-    <div className="button button--outline button--add" onClick={() => dispatch(updateCart(1))}>
+    <div className="button button--outline button--add" onClick={handleAddToCart}>
       <svg
         width="12"
         height="12"
@@ -18,7 +28,6 @@ export default function AddBtn() {
         />
       </svg>
       <span>Add</span>
-      <i>2</i>
     </div>
   );
 }
