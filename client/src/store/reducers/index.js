@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
-import { app } from './CartReducer';
+import { cartReducer } from './CartReducer';
 import { cats } from './filterReducer';
-import { main } from './fetchReducer';
-import { load } from './loadReducer';
+import { fetchReducer } from './fetchReducer';
+import { loadReducer } from './loadReducer';
 
 export const rootReducer = combineReducers({
-  app,
+  app: cartReducer,
   cats,
-  main,
-  load,
+  main: fetchReducer,
+  load: loadReducer,
 });

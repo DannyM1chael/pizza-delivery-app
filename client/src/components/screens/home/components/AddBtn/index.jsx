@@ -1,17 +1,23 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateCartCounter, updateCart, updateTotalCart } from '../../../../../store/actions';
+import { UPDATE_CART_COUNTER, UPDATE_CART, updateTotalCart } from '../../../../../store/actions';
 
 export default function AddBtn({ id }) {
-  const itemData = useSelector((state) => state.main.items.payload);
+  const itemData = useSelector((state) => state.main.items);
 
   const dispatch = useDispatch();
 
   const handleAddToCart = () => {
     const addedItem = itemData.find((item) => item.id === id);
-    dispatch(updateCartCounter());
-    dispatch(updateCart(addedItem));
-    dispatch(updateTotalCart(addedItem.price));
+
+    dispatch({
+      type: UPDATE_CART_COUNTER,
+    });
+    dispatch({
+      type: UPDATE_CART,
+      payload: addedItem,
+    });
+    dispatch(updateTotalCart());
   };
 
   return (

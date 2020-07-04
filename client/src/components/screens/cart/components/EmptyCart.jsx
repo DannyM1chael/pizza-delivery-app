@@ -7,7 +7,7 @@ export default function EmptyCart() {
     <>
       <div className="container container--cart">
         <div className="cart cart--empty">
-          <h2>Cart is empty</h2>
+          <h2>Cart is currently empty</h2>
           <p>It's seems to be you haven't order pizza yet</p>
           <img src={cartEmtyImg} alt="Empty cart" />
           <Link to="/" className="button button--black">

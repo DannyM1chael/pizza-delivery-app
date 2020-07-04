@@ -1,6 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { DELETE_FROM_CART, TOGGLE_AMOUNT } from '../../../../store/actions';
 
-export default function Item({ imageUrl, name, price }) {
+function Item({ imageUrl, name, price, deleteFromCart, toggle }) {
+  const [amount, setAmount] = useState(10);
+
   return (
     <div className="cart__item">
       <div className="cart__item-img">
@@ -11,7 +15,15 @@ export default function Item({ imageUrl, name, price }) {
         <p>Thin, 10"</p>
       </div>
       <div className="cart__item-count">
-        <div className="button button--outline button--circle cart__item-count-minus">
+        <div
+          className="button button--outline button--circle cart__item-count-minus"
+          onClick={() => {
+            if (amount === 1) {
+              return deleteFromCart();
+            } else {
+              return toggle('decrease');
+            }
+          }}>
           <svg
             width="10"
             height="10"
@@ -28,8 +40,10 @@ export default function Item({ imageUrl, name, price }) {
             />
           </svg>
         </div>
-        <b>2</b>
-        <div className="button button--outline button--circle cart__item-count-plus">
+        <b>{amount}</b>
+        <div
+          className="button button--outline button--circle cart__item-count-plus"
+          onClick={() => toggle('increase')}>
           <svg
             width="10"
             height="10"
@@ -51,7 +65,7 @@ export default function Item({ imageUrl, name, price }) {
         <b>&euro;{price}</b>
       </div>
       <div className="cart__item-remove">
-        <div className="button button--outline button--circle">
+        <div className="button button--outline button--circle" onClick={() => deleteFromCart()}>
           <svg
             width="10"
             height="10"
@@ -72,3 +86,12 @@ export default function Item({ imageUrl, name, price }) {
     </div>
   );
 }
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+    deleteFromCart: () => dispatch({ type: DELETE_FROM_CART, payload: ownProps }),
+    toggle: (toggle) => dispatch({ type: TOGGLE_AMOUNT, payload: ownProps, toggle }),
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Item);

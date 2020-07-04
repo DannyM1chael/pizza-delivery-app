@@ -1,13 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { CartTop, CartBottom, Item, EmptyCart } from './components';
-import { useSelector } from 'react-redux';
 
-export default function Cart() {
-  const counter = useSelector((state) => state.app.all);
-  const cartData = useSelector((state) => state.app.cart);
+function Cart({ cartData = [] }) {
   return (
     <div className="container container--cart">
-      {counter > 0 ? (
+      {cartData.length !== 0 ? (
         <>
           <CartTop />
           <div className="cart">
@@ -25,3 +23,11 @@ export default function Cart() {
     </div>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    cartData: state.app.cart,
+  };
+};
+
+export default connect(mapStateToProps)(Cart);

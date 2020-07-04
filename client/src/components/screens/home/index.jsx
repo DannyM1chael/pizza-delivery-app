@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { fetchItems } from '../../../store/actions';
 
 export default function Home() {
-  const itemData = useSelector((state) => state.main.items.payload);
+  const itemData = useSelector((state) => state.main.items);
   const categories = useSelector((state) => state.cats.categories);
   const sorts = useSelector((state) => state.cats.sorts);
   const loader = useSelector((state) => state.load.loading);
@@ -26,7 +26,7 @@ export default function Home() {
       <Category categories={categories} sorts={sorts} />
       <h2 className="content__title">Pizza</h2>
       <div className="content__items">
-        {itemData && itemData.map((item) => <Content key={item.id} {...item} />)}
+        {itemData && itemData.map((item) => <Content key={item._id} {...item} />)}
       </div>
     </div>
   );

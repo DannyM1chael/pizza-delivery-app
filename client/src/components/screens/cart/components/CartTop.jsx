@@ -1,6 +1,15 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
+import { DELETE_ALL_FROM_CART } from '../../../../store/actions';
 
 export default function CartTop() {
+  const dispatch = useDispatch();
+  const handleDeleteAll = () => {
+    dispatch({
+      type: DELETE_ALL_FROM_CART,
+    });
+  };
+
   return (
     <div className="cart__top">
       <h2 className="content__title">
@@ -34,7 +43,7 @@ export default function CartTop() {
         </svg>
         Cart
       </h2>
-      <div className="cart__clear">
+      <div className="cart__clear" onClick={handleDeleteAll}>
         <svg
           width="20"
           height="20"
@@ -70,7 +79,7 @@ export default function CartTop() {
             strokeLinejoin="round"
           />
         </svg>
-        <span>Clear cart</span>
+        <span>Clear Cart</span>
       </div>
     </div>
   );

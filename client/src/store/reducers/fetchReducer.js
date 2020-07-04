@@ -1,13 +1,14 @@
-import { createReducer } from '@reduxjs/toolkit';
 import * as actions from '../actions';
 
 const initialState = {
   items: [],
 };
 
-export const main = createReducer(initialState, {
-  [actions.fetchItemsSuccess]: (state, payload) => ({
-    ...state,
-    items: payload,
-  }),
-});
+export const fetchReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case actions.FETCH_ITEMS:
+      return { ...state, items: action.payload };
+    default:
+      return state;
+  }
+};
