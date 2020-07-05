@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { DELETE_FROM_CART, TOGGLE_AMOUNT } from '../../../../store/actions';
 
-function Item({ imageUrl, name, price, deleteFromCart, toggle }) {
-  const [amount, setAmount] = useState(10);
-
+function Item({ imageUrl, name, price, amount = 1, deleteFromCart, toggle }) {
   return (
     <div className="cart__item">
       <div className="cart__item-img">

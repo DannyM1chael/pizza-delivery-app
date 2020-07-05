@@ -4,7 +4,7 @@ import * as URL from '../../../../router/url';
 import { useSelector } from 'react-redux';
 
 export default function CartBottom() {
-  const counter = useSelector((state) => state.app.amount);
+  const counter = useSelector((state) => state.app.counter);
   const total = useSelector((state) => state.app.total);
 
   return (
@@ -33,10 +33,12 @@ export default function CartBottom() {
               strokeLinejoin="round"
             />
           </svg>
-          <span>Back to home</span>
+          <span>Back to Menu</span>
         </Link>
         <div className="button pay-btn">
-          <span>Order Now</span>
+          <Link to={URL.CHECKOUT}>
+            <span>Proceed to Checkout</span>
+          </Link>
         </div>
       </div>
     </div>

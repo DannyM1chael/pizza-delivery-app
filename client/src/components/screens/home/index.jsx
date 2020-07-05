@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
-import { Category } from '../../../components';
+import { Category, Spinner } from '../../../components';
 import { Content } from './components';
-import Spinner from '../../Spinner';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchItems } from '../../../store/actions';
+import Footer from '../../Footer';
 
 export default function Home() {
   const itemData = useSelector((state) => state.main.items);
@@ -28,6 +28,7 @@ export default function Home() {
       <div className="content__items">
         {itemData && itemData.map((item) => <Content key={item._id} {...item} />)}
       </div>
+      <Footer />
     </div>
   );
 }

@@ -11,7 +11,7 @@ export default function EmptyCart() {
           <p>It's seems to be you haven't order pizza yet</p>
           <img src={cartEmtyImg} alt="Empty cart" />
           <Link to="/" className="button button--black">
-            <span>Back to Home</span>
+            <span>Back to Menu</span>
           </Link>
         </div>
       </div>
