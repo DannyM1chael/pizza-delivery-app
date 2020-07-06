@@ -9,6 +9,19 @@ const initialState = {
 
 export const cartReducer = (state = initialState, action) => {
   switch (action.type) {
+    case actions.UPDATE_QTY:
+      return {
+        ...state,
+        cart: state.cart.map((existedItem) => {
+          if (existedItem.id === action.payload.id) {
+            return {
+              ...existedItem,
+              qty: action.payload.qty,
+            };
+          }
+          return existedItem;
+        }),
+      };
     case actions.GET_TOTALS:
       let { total, qty } = state.cart.reduce(
         (cartTotal, cartItem) => {
