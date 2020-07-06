@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { DELETE_FROM_CART, TOGGLE_AMOUNT } from '../../../../store/actions';
+import { DELETE_FROM_CART, TOGGLE_QTY } from '../../../../store/actions';
 
-function Item({ imageUrl, name, price, amount = 1, deleteFromCart, toggle }) {
+function Item({ imageUrl, name, price, qty, type, size, deleteFromCart, toggle }) {
   return (
     <div className="cart__item">
       <div className="cart__item-img">
@@ -10,13 +10,15 @@ function Item({ imageUrl, name, price, amount = 1, deleteFromCart, toggle }) {
       </div>
       <div className="cart__item-info">
         <h3>{name}</h3>
-        <p>Thin, 10"</p>
+        <p>
+          {type}, {size}"
+        </p>
       </div>
       <div className="cart__item-count">
         <div
           className="button button--outline button--circle cart__item-count-minus"
           onClick={() => {
-            if (amount === 1) {
+            if (qty === 1) {
               return deleteFromCart();
             } else {
               return toggle('decrease');
@@ -38,7 +40,7 @@ function Item({ imageUrl, name, price, amount = 1, deleteFromCart, toggle }) {
             />
           </svg>
         </div>
-        <b>{amount}</b>
+        <b>{qty}</b>
         <div
           className="button button--outline button--circle cart__item-count-plus"
           onClick={() => toggle('increase')}>
@@ -60,7 +62,7 @@ function Item({ imageUrl, name, price, amount = 1, deleteFromCart, toggle }) {
         </div>
       </div>
       <div className="cart__item-price">
-        <b>&euro;{price}</b>
+        <b>&euro;{price * qty}</b>
       </div>
       <div className="cart__item-remove">
         <div className="button button--outline button--circle" onClick={() => deleteFromCart()}>
@@ -86,9 +88,10 @@ function Item({ imageUrl, name, price, amount = 1, deleteFromCart, toggle }) {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
+  const { id } = ownProps;
   return {
-    deleteFromCart: () => dispatch({ type: DELETE_FROM_CART, payload: ownProps }),
-    toggle: (toggle) => dispatch({ type: TOGGLE_AMOUNT, payload: ownProps, toggle }),
+    deleteFromCart: () => dispatch({ type: DELETE_FROM_CART, payload: { id } }),
+    toggle: (toggle) => dispatch({ type: TOGGLE_QTY, payload: { id, toggle } }),
   };
 };
 

@@ -1,17 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import * as URL from '../../../../router/url';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { GET_TOTALS } from '../../../../store/actions';
 
 export default function CartBottom() {
-  const counter = useSelector((state) => state.app.counter);
+  const qty = useSelector((state) => state.app.qty);
   const total = useSelector((state) => state.app.total);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch({
+      type: GET_TOTALS,
+    });
+  });
 
   return (
     <div className="cart__bottom">
       <div className="cart__bottom-details">
         <span>
-          All: <b>{counter} pieces</b>
+          All: <b>{qty} pieces</b>
         </span>
         <span>
           Total: <b>&euro;{total}</b>

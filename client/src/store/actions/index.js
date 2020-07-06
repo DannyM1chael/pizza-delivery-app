@@ -1,18 +1,17 @@
-import { createAction } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-export const filterItems = createAction('FILTER_ITEMS');
-export const sortItems = createAction('SORT_ITEMS');
-
+export const FILTER_ITEMS = 'FILTER_ITEMS';
+export const SORT_ITEMS = 'SORT_ITEMS';
 export const SHOW_LOADER = 'SHOW_LOADER';
 export const HIDE_LOADER = 'HIDE_LOADER';
 export const FETCH_ITEMS = 'FETCH_ITEMS';
-export const UPDATE_CART_COUNTER = 'UPDATE_CART_COUNTER';
-export const UPDATE_CART_TOTAL = 'UPDATE_CART_TOTAL';
+export const GET_TOTALS = 'GET_TOTALS';
+export const UPDATE_QTY = 'UPDATE_QTY';
 export const UPDATE_CART = 'UPDATE_CART';
 export const DELETE_FROM_CART = 'DELETE_FROM_CART';
-export const DELETE_ALL_FROM_CART = 'DELETE_ALL_FROM_CART';
-export const TOGGLE_AMOUNT = 'TOGGLE_AMOUNT';
+export const CLEAR_CART = 'CLEAR_CART';
+export const TOGGLE_QTY = 'TOGGLE_QTY';
+export const PLACE_ORDER = 'PLACE_ORDER';
 
 export function showLoader() {
   return {
@@ -36,6 +35,14 @@ export const fetchItems = () => {
         payload: items,
       });
       dispatch(hideLoader());
+    });
+  };
+};
+
+export const placeOrder = () => {
+  return (dispatch) => {
+    dispatch({
+      type: PLACE_ORDER,
     });
   };
 };

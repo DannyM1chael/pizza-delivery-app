@@ -7,8 +7,8 @@ import Footer from '../../Footer';
 
 export default function Home() {
   const itemData = useSelector((state) => state.main.items);
-  const categories = useSelector((state) => state.cats.categories);
-  const sorts = useSelector((state) => state.cats.sorts);
+  const categories = useSelector((state) => state.filter.categories);
+  const sorts = useSelector((state) => state.filter.sorts);
   const loader = useSelector((state) => state.load.loading);
 
   const dispatch = useDispatch();

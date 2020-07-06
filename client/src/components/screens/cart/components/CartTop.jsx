@@ -1,12 +1,12 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { DELETE_ALL_FROM_CART } from '../../../../store/actions';
+import { CLEAR_CART } from '../../../../store/actions';
 
 export default function CartTop() {
   const dispatch = useDispatch();
   const handleDeleteAll = () => {
     dispatch({
-      type: DELETE_ALL_FROM_CART,
+      type: CLEAR_CART,
     });
   };
 

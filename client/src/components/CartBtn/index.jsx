@@ -1,11 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { GET_TOTALS } from '../../store/actions';
 import * as URL from '../../router/url';
 
 export default function CartBtn() {
-  const counter = useSelector((state) => state.app.counter);
+  const qty = useSelector((state) => state.app.qty);
   const total = useSelector((state) => state.app.total);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch({
+      type: GET_TOTALS,
+    });
+  });
+
   return (
     <div className="header__cart">
       <Link to={URL.CART} className="button button--cart">
@@ -39,7 +49,7 @@ export default function CartBtn() {
             strokeLinejoin="round"
           />
         </svg>
-        <span>{counter}</span>
+        <span>{qty}</span>
       </Link>
     </div>
   );

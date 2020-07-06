@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { UPDATE_CART_COUNTER, UPDATE_CART, UPDATE_CART_TOTAL } from '../../../../../store/actions';
+import { UPDATE_CART, GET_TOTALS } from '../../../../../store/actions';
 
 export default function AddBtn({ id }) {
   const itemData = useSelector((state) => state.main.items);
@@ -12,23 +12,22 @@ export default function AddBtn({ id }) {
     const addedItem = itemData.find((item) => item.id === id);
     const existedItem = cartData.find((item) => id === item.id);
 
-    if (existedItem) {
-      dispatch({
-        type: UPDATE_CART_TOTAL,
-        payload: existedItem,
-      });
-    } else {
-      dispatch({
-        type: UPDATE_CART_TOTAL,
-        payload: addedItem,
-      });
-      dispatch({
-        type: UPDATE_CART,
-        payload: addedItem,
-      });
-    }
+    // if (existedItem) {
+    //   console.log('id', id);
+    //   console.log('price', existedItem.price);
+    // } else {
+    //   dispatch({
+    //     type: UPDATE_CART,
+    //     payload: addedItem,
+    //   });
+    // }
+
     dispatch({
-      type: UPDATE_CART_COUNTER,
+      type: UPDATE_CART,
+      payload: addedItem,
+    });
+    dispatch({
+      type: GET_TOTALS,
     });
   };
 

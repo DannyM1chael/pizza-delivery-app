@@ -1,4 +1,3 @@
-import { createReducer } from '@reduxjs/toolkit';
 import * as actions from '../actions';
 
 const initialState = {
@@ -6,7 +5,13 @@ const initialState = {
   sorts: ['popularity', 'price', 'name'],
 };
 
-export const cats = createReducer(initialState, {
-  [actions.filterItems]: (state) => ({ ...state, category: state.category }),
-  [actions.sortItems]: (state) => ({ ...state, sorts: state.sorts }),
-});
+export const filterReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case actions.FILTER_ITEMS:
+      return { ...state, categories: state.categories };
+    case actions.SORT_ITEMS:
+      return { ...state, sorts: state.sorts };
+    default:
+      return state;
+  }
+};

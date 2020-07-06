@@ -3,17 +3,20 @@ import { Link } from 'react-router-dom';
 import * as URL from '../../../router/url';
 import { ToastContainer, toast } from 'react-toastify';
 import { Payment, Form, Total } from './components';
+import { useDispatch } from 'react-redux';
+import { placeOrder } from '../../../store/actions';
 import 'react-toastify/dist/ReactToastify.css';
 
 export default function Checkout() {
+  const dispatch = useDispatch();
   const notify = () =>
     toast.success('Your order is received', {
       position: 'top-center',
-      autoClose: 3000,
+      autoClose: 2000,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
-      draggable: true,
+      draggable: false,
       progress: undefined,
     });
   return (
@@ -45,12 +48,14 @@ export default function Checkout() {
           </svg>
           <span>Back to Cart</span>
         </Link>
-        <div className="button pay-btn" onClick={notify}>
-          <Link to="#">
-            <span>Order Now</span>
-          </Link>
+        <Link
+          to="#"
+          className="button pay-btn"
+          onClick={notify}
+          onMouseDown={() => dispatch(placeOrder())}>
+          <span>Order Now</span>
           <ToastContainer />
-        </div>
+        </Link>
       </div>
     </div>
   );
