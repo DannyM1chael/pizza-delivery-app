@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux';
 export default function Total() {
   const subTotal = useSelector((state) => state.app.total);
   const deliveryCost = useSelector((state) => state.app.delivery);
+
   return (
     <div className="col-md-12 d-flex mb-3">
       <div className="cart-total">

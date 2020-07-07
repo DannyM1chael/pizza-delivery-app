@@ -51,6 +51,7 @@ export default function Checkout() {
         <Link
           to="#"
           className="button pay-btn"
+          type="submit"
           onClick={notify}
           onMouseDown={() => dispatch(placeOrder())}>
           <span>Order Now</span>

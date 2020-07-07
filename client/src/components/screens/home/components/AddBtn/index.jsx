@@ -2,7 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { UPDATE_CART, GET_TOTALS, UPDATE_QTY } from '../../../../../store/actions';
 
-export default function AddBtn({ id }) {
+export default function AddBtn({ id, size, type }) {
   const itemData = useSelector((state) => state.main.items);
   const cartData = useSelector((state) => state.app.cart);
 
@@ -12,6 +12,12 @@ export default function AddBtn({ id }) {
     const addedItem = itemData.find((item) => item.id === id);
     const existedItem = cartData.find((item) => id === item.id);
 
+    let cartItem = {
+      ...addedItem,
+      size: addedItem.sizes[size],
+      type: addedItem.types[type],
+    };
+
     if (existedItem) {
       dispatch({
         type: UPDATE_QTY,
@@ -20,7 +26,7 @@ export default function AddBtn({ id }) {
     } else {
       dispatch({
         type: UPDATE_CART,
-        payload: addedItem,
+        payload: cartItem,
       });
     }
     dispatch({
