@@ -7,9 +7,9 @@
     "start": "node index.js",
     "server": "nodemon index.js",
     "client": "cd client && npm start",
-    "install-client": "cd client && npm install",
-    "heroku-postbuild": "npm install-client && npm run build-client",
-    "build-client": "cd client && npm run build",
+    "install": "cd client && npm install",
+    "heroku-postbuild": "npm install && npm run build",
+    "build": "cd client && npm run build",
     "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "Denis Mikhalev <coldsoulrusirk@gmail.com>",
