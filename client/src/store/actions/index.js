@@ -27,7 +27,7 @@ export function hideLoader() {
 export const fetchItems = () => {
   return (dispatch) => {
     dispatch(showLoader());
-    axios.get('http://localhost:4000/').then((response) => {
+    axios.get('/api/items').then((response) => {
       const items = response.data;
       dispatch({
         type: FETCH_ITEMS,

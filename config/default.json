@@ -1,4 +1,3 @@
 {
-  "port": 4000,
   "mongoUri": "mongodb+srv://Danny:inno2020@cluster0.fytxx.mongodb.net/pizza_delivery"
 }

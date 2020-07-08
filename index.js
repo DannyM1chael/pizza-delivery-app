@@ -1,35 +1,24 @@
 const express = require('express');
-const mongoose = require('mongoose');
+const cors = require('cors');
 const path = require('path');
-const config = require('config');
 
-const PORT = process.env.PORT || 4000;
+const db = require('./db');
+const itemRouter = require('./routes');
+
 const app = express();
-const router = require('./router');
+app.use(cors());
 
-async function startDb() {
-  try {
-    await mongoose.connect(config.get('mongoUri'), {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
-    });
-    app.listen(PORT, () => {
-      console.log(`Server has been started on port ${PORT}`);
-    });
-  } catch (error) {
-    console.log('Server error', error.message);
-    process.env(1);
-  }
-}
+db.on('error', console.error.bind(console, 'MongoDb connection error:'));
 
-startDb();
-app.use(router);
+app.use('/api', itemRouter);
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static('client/build'));
+  app.use(express.static(path.join(__dirname, '../build')));
 
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
 }
+
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, () => console.log(`Server is up and running on port ${PORT}`));

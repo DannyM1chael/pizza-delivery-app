@@ -35,6 +35,30 @@ const schema = new Schema({
     type: Number,
     required: true,
   },
+  qty: {
+    type: Number,
+    required: true,
+  },
+  value: {
+    type: Number,
+    required: true,
+  },
+  protein: {
+    type: Number,
+    required: true,
+  },
+  carbohydrates: {
+    type: Number,
+    required: true,
+  },
+  fats: {
+    type: Number,
+    required: true,
+  },
+  composition: {
+    type: String,
+    required: true,
+  },
 });
 
 module.exports = model('Item', schema);
