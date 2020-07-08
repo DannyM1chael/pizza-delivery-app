@@ -1,5 +1,4 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const path = require('path');
 const config = require('config');
@@ -7,8 +6,6 @@ const config = require('config');
 const PORT = process.env.PORT || 4000;
 const app = express();
 const router = require('./router');
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
 
 async function startDb() {
   try {
@@ -26,7 +23,7 @@ async function startDb() {
   }
 }
 
-app.use(router);
+startDb();
 
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'));
@@ -36,4 +33,4 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-startDb();
+app.use(router);
