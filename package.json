@@ -4,13 +4,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=production node index.js",
+    "start": "NODE_ENV=production node index.js",
     "server": "nodemon index.js",
-    "client": "npm start --prefix client",
+    "client": "cd client && npm start",
     "install-client": "cd client && npm install",
     "heroku-postbuild": "npm run install-client && npm run build",
     "build": "cd client && npm run build",
-    "dev": "cross-env NODE_ENV=development concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "author": "Denis Mikhalev <coldsoulrusirk@gmail.com>",
   "license": "ISC",
@@ -22,7 +22,6 @@
     "mongoose": "^5.9.21"
   },
   "devDependencies": {
-    "cross-env": "^7.0.2",
     "nodemon": "^2.0.4"
   }
 }
