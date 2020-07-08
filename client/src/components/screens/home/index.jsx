@@ -1,15 +1,33 @@
-import React, { useEffect } from 'react';
-import { Category, Spinner } from '../../../components';
-import { Content } from './components';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import { createSelector } from 'reselect';
 import { fetchItems } from '../../../store/actions';
 import Footer from '../../Footer';
+import { Spinner } from '../../../components';
+import { Content } from './components';
 
 export default function Home() {
   const itemData = useSelector((state) => state.main.items);
   const categories = useSelector((state) => state.filter.categories);
-  const sorts = useSelector((state) => state.filter.sorts);
   const loader = useSelector((state) => state.load.loading);
+  const [activeCategory, setActiveCategory] = useState(null);
+
+  const selectItems = () => itemData;
+  const createSelectFilteredItems = (filterFunction) =>
+    createSelector([selectItems], (items) => items.filter(filterFunction));
+
+  const selectFilteredItems = React.useMemo(
+    () =>
+      createSelectFilteredItems(({ category }) =>
+        activeCategory === null ? true : category === activeCategory,
+      ),
+    [activeCategory],
+  );
+
+  let filteredItems = useSelector(selectFilteredItems);
+  if (activeCategory === null) {
+    filteredItems = itemData;
+  }
 
   const dispatch = useDispatch();
 
@@ -23,10 +41,30 @@ export default function Home() {
 
   return (
     <div className="container">
-      <Category categories={categories} sorts={sorts} />
+      <div className="content__top">
+        <div className="categories">
+          <ul>
+            <li
+              className={activeCategory === null ? 'active' : ''}
+              value="All"
+              onClick={() => setActiveCategory(null)}>
+              All
+            </li>
+            {categories &&
+              categories.map((category, index) => (
+                <li
+                  key={index}
+                  className={activeCategory === index ? 'active' : ''}
+                  onClick={() => setActiveCategory(index)}>
+                  {category}
+                </li>
+              ))}
+          </ul>
+        </div>
+      </div>
       <h2 className="content__title">Pizza</h2>
       <div className="content__items">
-        {itemData && itemData.map((item) => <Content key={item._id} {...item} />)}
+        {filteredItems && filteredItems.map((item) => <Content key={item._id} {...item} />)}
       </div>
       <Footer />
     </div>

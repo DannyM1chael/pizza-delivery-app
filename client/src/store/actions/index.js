@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 export const FILTER_ITEMS = 'FILTER_ITEMS';
-export const SORT_ITEMS = 'SORT_ITEMS';
 export const SHOW_LOADER = 'SHOW_LOADER';
 export const HIDE_LOADER = 'HIDE_LOADER';
 export const FETCH_ITEMS = 'FETCH_ITEMS';

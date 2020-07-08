@@ -22,7 +22,10 @@ export default function CartBottom() {
           All: <b>{qty} pieces</b>
         </span>
         <span>
-          Total: <b>&euro;{total}</b>
+          Total:{' '}
+          <b>
+            &euro;{total}&nbsp;(${(total * 1.12).toFixed(2)})
+          </b>
         </span>
       </div>
       <div className="cart__bottom-buttons">
