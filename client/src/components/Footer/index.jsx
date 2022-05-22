@@ -9,7 +9,7 @@ export default function Footer() {
         <div className="col text-center pt-4">
           <h4>Denis Mikhalev &copy;</h4>
           <p>Full Stack Web Developer</p>
-          <p>coldsoulrusirk@gmail.com</p>
+          <p>Telegram: @DannyM1chael</p>
         </div>
       </div>
     </div>
